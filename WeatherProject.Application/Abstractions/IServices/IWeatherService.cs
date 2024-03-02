@@ -11,11 +11,16 @@ namespace WeatherProject.Application.Abstractions.IServices
 {
     public interface IWeatherService
     {
-        public Task<Weather> Create(Weather weather);
-        public Task<Weather> GetByAny(Expression<Func<Weather, bool>> expression);
+        public Task<Weather> Create(WeatherDTO weatherDTO);
+        public Task<Weather> GetByName(string name);
+
+        public Task<Weather> GetById(int id);
+
+        public Task<Weather> GetByCloudCondition(string condition);
+
         public Task<IEnumerable<Weather>> GetAll();
         public Task<bool> Delete(Expression<Func<Weather, bool>> expression);
-        public Task<Weather> Update(int id,WeatherDTO weatherDTO);
+        public Task<Weather> Update(int id, WeatherDTO weatherDTO);
 
     }
 }

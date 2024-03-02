@@ -26,7 +26,7 @@ namespace WeatherProject.Infrastructura
             });
 
             services.AddScoped<IWeatherRepository,WeatherRepository>();
-
+            services.AddScoped<IWeatherService,WeatherService>();
 
             return services;
 

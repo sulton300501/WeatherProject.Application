@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace WeatherProject.Application.Abstractions
 {
     public interface IBaseRepository<T> where T : class

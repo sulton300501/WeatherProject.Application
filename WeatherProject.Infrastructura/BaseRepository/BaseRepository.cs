@@ -18,14 +18,14 @@ namespace WeatherProject.Infrastructura.BaseRepository
         private readonly WeatherProjectsDbContext _context;
         private readonly DbSet<T> _dbSet;
 
+       /* public BaseRepository(WeatherProjectsDbContext context)
+        {
+        }*/
+
         public BaseRepository(WeatherProjectsDbContext context)
         {
-        }
-
-        public BaseRepository(WeatherProjectsDbContext context, DbSet<T> dbSet)
-        {
             _context = context;
-            _dbSet = dbSet;
+            _dbSet = context.Set<T>();
         }
 
         public async Task<T> Create(T entity)
