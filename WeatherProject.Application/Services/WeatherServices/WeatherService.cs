@@ -75,15 +75,14 @@ namespace WeatherProject.Application.Services.WeatherServices
 
             if (res != null)
             {
-                var weather = new Weather()
-                {
-                    CityName = weatherDTO.CityName,
-                    CloudCondition = weatherDTO.CloudCondition,
-                    WindSpeed = weatherDTO.WindSpeed,
-                    SunShine = weatherDTO.SunShine,
 
-                };
-                var result = await _weatherRepository.Update(weather);
+                res.CityName = weatherDTO.CityName;
+                res.CloudCondition = weatherDTO.CloudCondition;
+                res.WindSpeed = weatherDTO.WindSpeed;
+                res.SunShine = weatherDTO.SunShine;
+
+              
+                var result = await _weatherRepository.Update(res);
                 return result;
             }
             return new Weather();
