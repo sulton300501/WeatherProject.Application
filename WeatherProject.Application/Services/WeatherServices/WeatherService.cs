@@ -39,7 +39,7 @@ namespace WeatherProject.Application.Services.WeatherServices
             return result;
         }
 
-        public async Task<IEnumerable<Weather>> GetAll()
+        public async Task<List<Weather>> GetAll()
         {
            var res = await _weatherRepository.GetAll();
             return res;

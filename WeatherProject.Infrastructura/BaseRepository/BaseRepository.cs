@@ -46,7 +46,7 @@ namespace WeatherProject.Infrastructura.BaseRepository
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<List<T>> GetAll()
         {
             return await _dbSet.ToListAsync();
         }

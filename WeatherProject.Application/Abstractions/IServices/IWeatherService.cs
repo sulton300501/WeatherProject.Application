@@ -18,7 +18,7 @@ namespace WeatherProject.Application.Abstractions.IServices
 
         public Task<Weather> GetByCloudCondition(string condition);
 
-        public Task<IEnumerable<Weather>> GetAll();
+        public Task<List<Weather>> GetAll();
         public Task<bool> Delete(Expression<Func<Weather, bool>> expression);
         public Task<Weather> Update(int id, WeatherDTO weatherDTO);
 
