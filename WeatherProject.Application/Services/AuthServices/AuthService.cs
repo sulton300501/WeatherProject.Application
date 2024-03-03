@@ -12,6 +12,7 @@ using WeatherProject.Domain.Entities.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using WeatherProject.Domain.Entities.DTOs;
+using System.Text.Json;
 
 namespace WeatherProject.Application.Services.AuthServices
 {
@@ -38,6 +39,25 @@ namespace WeatherProject.Application.Services.AuthServices
             if (await UserExist(weather))
             {
 
+
+                var permissions = new List<int>();
+
+                if (weather.Role == "Moons")
+                {
+                    permissions = new List<int>() { 1, 2, 3};
+                }
+                else if (weather.Role == "Stars")
+                {
+                    permissions = new List<int>() {1,2,4 };
+                }
+             
+
+
+                var jsonContent = JsonSerializer.Serialize(permissions);
+
+
+
+
                 // var res = await _weatherService.GetWindSpeed();
 
                 List<Claim> claims = new List<Claim>()
@@ -46,6 +66,8 @@ namespace WeatherProject.Application.Services.AuthServices
                     new Claim("CityName",weather.CityName),
                   //  new Claim("WeatherId",weather.Id.ToString()),
                     new Claim("CreateDate", DateTime.UtcNow.ToString()),
+                    new Claim("Permission", jsonContent )
+
 
 
 
