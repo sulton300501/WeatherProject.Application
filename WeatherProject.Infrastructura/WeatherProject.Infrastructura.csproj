@@ -20,4 +20,8 @@
     <ProjectReference Include="..\WeatherProject.Domain\WeatherProject.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

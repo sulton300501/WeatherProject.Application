@@ -12,7 +12,7 @@ namespace WeatherProject.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+    
     public class WeatherController : ControllerBase
     {   
         private readonly IWeatherService _weatherService;

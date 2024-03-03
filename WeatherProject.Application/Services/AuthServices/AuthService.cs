@@ -11,6 +11,7 @@ using WeatherProject.Application.Abstractions.IServices;
 using WeatherProject.Domain.Entities.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using WeatherProject.Domain.Entities.DTOs;
 
 namespace WeatherProject.Application.Services.AuthServices
 {
@@ -27,23 +28,23 @@ namespace WeatherProject.Application.Services.AuthServices
 
 
 
-        public async Task<string> GenerateToken(Weather weather)
+        public async Task<string> GenerateToken(WeatherDTO weather)
         {
-            if(weather == null)
+            if (weather == null)
             {
                 throw new ArgumentNullException("user");
             }
 
-            if(await UserExist(weather))
+            if (await UserExist(weather))
             {
 
-               // var res = await _weatherService.GetWindSpeed();
+                // var res = await _weatherService.GetWindSpeed();
 
                 List<Claim> claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Role, weather.Role),
                     new Claim("CityName",weather.CityName),
-                    new Claim("WeatherId",weather.Id.ToString()),
+                  //  new Claim("WeatherId",weather.Id.ToString()),
                     new Claim("CreateDate", DateTime.UtcNow.ToString()),
 
 
@@ -56,7 +57,7 @@ namespace WeatherProject.Application.Services.AuthServices
             {
                 return "User Unauthorize 401";
             }
-            
+
 
 
         }
@@ -103,13 +104,13 @@ namespace WeatherProject.Application.Services.AuthServices
 
 
 
-        private async Task<bool> UserExist(Weather weather)
+        private async Task<bool> UserExist(WeatherDTO weather)
         {
             var maxWind = 1;
-           // var res = await _weatherService.GetWindSpeed(weather.WindSpeed);
-          
+            // var res = await _weatherService.GetWindSpeed(weather.WindSpeed);
 
-           // var windSpeed = Convert.ToDecimal(weather.WindSpeed);
+
+            // var windSpeed = Convert.ToDecimal(weather.WindSpeed);
 
             if (maxWind < weather.WindSpeed)
             {

@@ -18,9 +18,9 @@ namespace WeatherProject.API
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddEndpointsApiExplorer();
 
-            builder.Services.AddInfrastructure(builder.Configuration);
 
 
 

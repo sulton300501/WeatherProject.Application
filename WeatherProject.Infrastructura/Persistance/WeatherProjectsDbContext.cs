@@ -15,7 +15,7 @@ namespace WeatherProject.Infrastructura.Persistance
          Database.Migrate();
         }
      
-        public DbSet<Weather> Weathers { get; set; }
+        public DbSet<Weather> Weatherse { get; set; }
     }
 
     
