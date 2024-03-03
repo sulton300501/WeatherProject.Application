@@ -28,6 +28,7 @@ namespace WeatherProject.Application.Services.WeatherServices
                 CloudCondition = weatherDTO.CloudCondition,
                 WindSpeed = weatherDTO.WindSpeed,
                 SunShine = weatherDTO.SunShine,
+                Role= weatherDTO.Role
             };
             var result = await _weatherRepository.Create(weather);
             return result;
@@ -69,6 +70,13 @@ namespace WeatherProject.Application.Services.WeatherServices
             return result;
         }
 
+        public async Task<Weather> GetWindSpeed(int wind)
+        {
+            
+            var result = await _weatherRepository.GetByAny(x => x.WindSpeed == wind);
+            return result;
+        }
+
         public async Task<Weather> Update(int id, WeatherDTO weatherDTO)
         {
             var res =await _weatherRepository.GetByAny(x=>x.Id==id);
@@ -80,6 +88,7 @@ namespace WeatherProject.Application.Services.WeatherServices
                 res.CloudCondition = weatherDTO.CloudCondition;
                 res.WindSpeed = weatherDTO.WindSpeed;
                 res.SunShine = weatherDTO.SunShine;
+                res.Role = weatherDTO.Role;
 
               
                 var result = await _weatherRepository.Update(res);

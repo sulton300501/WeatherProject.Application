@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WeatherProject.Application.Abstractions;
 using WeatherProject.Application.Abstractions.IServices;
+using WeatherProject.Application.Services.AuthServices;
 using WeatherProject.Application.Services.WeatherServices;
 using WeatherProject.Infrastructura.BaseRepository;
 using WeatherProject.Infrastructura.Persistance;
@@ -27,6 +28,7 @@ namespace WeatherProject.Infrastructura
 
             services.AddScoped<IWeatherRepository,WeatherRepository>();
             services.AddScoped<IWeatherService,WeatherService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
 

@@ -15,6 +15,7 @@ namespace WeatherProject.Application.Abstractions.IServices
         public Task<Weather> GetByName(string name);
 
         public Task<Weather> GetById(int id);
+        public Task<Weather> GetWindSpeed(int wind);
 
         public Task<Weather> GetByCloudCondition(string condition);
 
