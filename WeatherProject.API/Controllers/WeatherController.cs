@@ -15,15 +15,17 @@ namespace WeatherProject.API.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
-    
+
     public class WeatherController : ControllerBase
-    {   
+    {
 
         private readonly IWeatherService _weatherService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public WeatherController(IWeatherService weatherService)
+        public WeatherController(IWeatherService weatherService, IWebHostEnvironment webHostEnvironment)
         {
             _weatherService = weatherService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
@@ -38,42 +40,42 @@ namespace WeatherProject.API.Controllers
         };
 
 
-     /*   [HttpGet]
-      
-        public IActionResult GetQuyosh()
-        {
-            return Ok(quyosh);
-        }
+        /*   [HttpGet]
 
-        [HttpGet]
-       
-        public IActionResult GetYulduz()
-        {
-            return Ok(yulduz);
-        }*/
+           public IActionResult GetQuyosh()
+           {
+               return Ok(quyosh);
+           }
+
+           [HttpGet]
+
+           public IActionResult GetYulduz()
+           {
+               return Ok(yulduz);
+           }*/
 
 
 
-     /*   [HttpGet]
-        [IdentifyFilter(Permission.GetAllStudents)]
-        public IActionResult GetMoons()
-        {
-            return Ok(quyosh);
-        }
+        /*   [HttpGet]
+           [IdentifyFilter(Permission.GetAllStudents)]
+           public IActionResult GetMoons()
+           {
+               return Ok(quyosh);
+           }
 
-        [HttpPost]
-        [IdentifyFilter(Permission.CreateStudent)]
-        public IActionResult GreateStars()
-        {
-            return Ok("create boldi");
-        }
-*/
-       /* [HttpPost]
-        [IdentifyFilter()]
-        public IActionResult DeleteStars()  
-        {
-            return Ok("Delete boldi");
-        }*/
+           [HttpPost]
+           [IdentifyFilter(Permission.CreateStudent)]
+           public IActionResult GreateStars()
+           {
+               return Ok("create boldi");
+           }
+   */
+        /* [HttpPost]
+         [IdentifyFilter()]
+         public IActionResult DeleteStars()  
+         {
+             return Ok("Delete boldi");
+         }*/
 
 
 
@@ -92,14 +94,25 @@ namespace WeatherProject.API.Controllers
 
         [HttpPost]
         [IdentifyFilter(Permission.CreateWeather)]
-        public async Task<ActionResult<IEnumerable<Weather>>> CreateWeather(WeatherDTO model)
+        public async Task<ActionResult<IEnumerable<Weather>>> CreateWeather([FromForm] WeatherDTO model)
         {
+            model.ImageUrl = model.Image.FileName;
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "image", model.ImageUrl);
+
+            using var stream = System.IO.File.Create(path);
+            {
+                model.Image.CopyTo(stream);
+            }
+
+
+            /*  image.CopyTo(Path.Combine(_webHostEnvironment.WebRootPath, "image", image.FileName));*/
             var result = await _weatherService.Create(model);
 
             return Ok(result);
         }
 
         [HttpDelete]
+        [IdentifyFilter(Permission.DeleteWeather)]
         public async Task<ActionResult<IEnumerable<Weather>>> DeleteWeather(int id)
         {
             Expression<Func<Weather, bool>> predicate = x => x.Id == id;
@@ -110,9 +123,10 @@ namespace WeatherProject.API.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult<IEnumerable<Weather>>> UpdateWeather(int id,WeatherDTO model)
+        [IdentifyFilter(Permission.UpdateWeather)]
+        public async Task<ActionResult<IEnumerable<Weather>>> UpdateWeather(int id, WeatherDTO model)
         {
-            var result = await _weatherService.Update(id,model);
+            var result = await _weatherService.Update(id, model);
 
             return Ok(result);
         }

@@ -22,4 +22,8 @@
     <ProjectReference Include="..\WeatherProject.Infrastructura\WeatherProject.Infrastructura.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\image\" />
+  </ItemGroup>
+
 </Project>

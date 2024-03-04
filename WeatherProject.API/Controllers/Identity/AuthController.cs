@@ -20,20 +20,10 @@ namespace WeatherProject.API.Controllers.Identity
 
 
         [HttpPost]
-        public IActionResult WideSpeed(WeatherDTO weather)
+        public IActionResult WideSpeed([FromBody]WeatherDTO weather)
         {
             var result = _authService.GenerateToken(weather);
             return Ok(result);
         }
-
-
-      
-
-
-
-
-
-
-
     }
 }

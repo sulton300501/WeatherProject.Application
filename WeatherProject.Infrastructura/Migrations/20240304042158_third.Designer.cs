@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WeatherProject.Infrastructura.Persistance;
@@ -11,9 +12,11 @@ using WeatherProject.Infrastructura.Persistance;
 namespace WeatherProject.Infrastructura.Migrations
 {
     [DbContext(typeof(WeatherProjectsDbContext))]
-    partial class WeatherProjectsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240304042158_third")]
+    partial class third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,6 +40,7 @@ namespace WeatherProject.Infrastructura.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Role")

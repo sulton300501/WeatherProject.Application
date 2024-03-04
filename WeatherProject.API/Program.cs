@@ -113,6 +113,8 @@ namespace WeatherProject.API
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
 
             app.UseAuthentication();
 

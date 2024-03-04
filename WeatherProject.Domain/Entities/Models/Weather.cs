@@ -15,6 +15,7 @@ namespace WeatherProject.Domain.Entities.Models
         public int? WindSpeed { get; set; }
         public string? SunShine { get; set; }
         public string Role { get; set; }
+        public string? ImageUrl { get; set; }
 
     }
 }

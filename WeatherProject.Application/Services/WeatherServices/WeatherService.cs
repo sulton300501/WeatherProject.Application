@@ -28,7 +28,8 @@ namespace WeatherProject.Application.Services.WeatherServices
                 CloudCondition = weatherDTO.CloudCondition,
                 WindSpeed = weatherDTO.WindSpeed,
                 SunShine = weatherDTO.SunShine,
-                Role= weatherDTO.Role
+                Role= weatherDTO.Role,
+                ImageUrl= weatherDTO.ImageUrl
             };
             var result = await _weatherRepository.Create(weather);
             return result;
